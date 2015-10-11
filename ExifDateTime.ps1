@@ -1,13 +1,52 @@
 ﻿
 <#
 
+Read Image Metadata:
+https://msdn.microsoft.com/en-us/library/xddt0dz7(v=vs.110).aspx
+
+PropertyItem.Id Property (List of Property Ids):
+https://msdn.microsoft.com/en-us/library/system.drawing.imaging.propertyitem.id(v=vs.110).aspx
+
+Property Item Descriptions:
+https://msdn.microsoft.com/en-us/library/ms534416.aspx
+
+https://msdn.microsoft.com/en-us/library/system.drawing.imaging.propertyitem(v=vs.110).aspx
+A PropertyItem is not intended to be used as a stand-alone object. A PropertyItem object is intended 
+to be used by classes that are derived from Image. A PropertyItem object is used to retrieve and to 
+change the metadata of existing image files, not to create the metadata. Therefore, the PropertyItem 
+class does not have a defined Public constructor, and you cannot create an instance of a PropertyItem 
+object.
+
+To work around the absence of a Public constructor, use an existing PropertyItem object instead of 
+creating a new instance of the PropertyItem class. For more information, see Image.GetPropertyItem.
+
+
+Image Img = new Bitmap("c:\\fakePhoto.jpg");
+
+// Get the PropertyItems property from image.
+PropertyItem[] PropItems = Img.PropertyItems;
+foreach ( PropertyItem PropItem in PropItems )
+{
+}
+
+
+https://msdn.microsoft.com/en-us/library/system.drawing.image.getpropertyitem(v=vs.110).aspx 
+It is difficult to set property items, because the PropertyItem class has no public constructors. 
+One way to work around this restriction is to obtain a PropertyItem by retrieving the PropertyItems 
+property value or calling the GetPropertyItem method of an Image that already has property items. 
+Then you can set the fields of the PropertyItem and pass it to SetPropertyItem.
+
+
+
 Chris Warwick, @cjwarwickps, August 2013
 chrisjwarwick.wordpress.com
 
-Revision: Now support PowerShell version 2.0 and above.
+Supports PowerShell versions 2.0 and above.
 
-This version published on SkyDrive here:
-https://skydrive.live.com/redir?resid=7CB58BE453F7E567!1289&authkey=!ANY88H3ABytkigk
+
+#Todo: Add an -InPlace switch to update the file (return the fileinfo value if using this...)
+#Todo: If not specifying -InPlace then create a new file in the current(?) directory
+#Todo: Add a -FileNameModifier param??? to name the copied files (default = prepend EDT to file name?)
 
 
 The script file contains two functions:

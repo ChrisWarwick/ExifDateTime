@@ -80,10 +80,7 @@ Param (
     Begin 
     {
         Set-StrictMode -Version Latest
-        If ($PSVersionTable.PSVersion.Major -lt 3) {
-            Add-Type -AssemblyName 'System.Drawing'
-        }
-
+        Add-Type -AssemblyName 'System.Drawing'
     }
 
 
